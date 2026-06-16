@@ -32,7 +32,7 @@ return function (App $app) {
         $sueldo = $parsedBody['NSueldo'] ?? 0.0;
         $idHospital = $parsedBody['IdHospital'] ?? ''; // Llave foránea
 
-        $sql = "INSERT INTO Doctores (IdDoctor, Nombres_Doctor, Apellidos_Doctor, Especialidad, TurnoAtencion, PacientesMinDiarios, NSueldo, IdHospital) 
+        $sql = "INSERT INTO doctores (IdDoctor, Nombres_Doctor, Apellidos_Doctor, Especialidad, TurnoAtencion, PacientesMinDiarios, NSueldo, IdHospital) 
                 VALUES (:IdDoctor, :Nombres_Doctor, :Apellidos_Doctor, :Especialidad, :TurnoAtencion, :PacientesMinDiarios, :NSueldo, :IdHospital)";
 
         try {
@@ -72,7 +72,7 @@ return function (App $app) {
 
     //Metodo GET para obetener la lista de Doctores registrados en la base de datos
     $app->get('/api/doctores', function (Request $request, Response $response) {
-        $sql = "SELECT * FROM Doctores";
+        $sql = "SELECT * FROM doctores";
 
         try {
             $db = new db_sistemaHospital();
@@ -106,7 +106,7 @@ return function (App $app) {
         $capacidad = $parsedBody['CapacidadAtencion'] ?? '';
         $especialidades = $parsedBody['Especialidades'] ?? '';
 
-        $sql = "INSERT INTO Hospitales (IdHospital, NomHospital, CapacidadAtencion, Especialidades) 
+        $sql = "INSERT INTO hospitales (IdHospital, NomHospital, CapacidadAtencion, Especialidades) 
                 VALUES (:IdHospital, :NomHospital, :CapacidadAtencion, :Especialidades)";
 
         try {
@@ -139,7 +139,7 @@ return function (App $app) {
     //Metodo GET para obtener un Hospital en específico de la base de datos
     $app->get('/api/hospitales/{id}', function (Request $request, Response $response, array $args) {
         $idHospital = $args['id'];
-        $sql = "SELECT * FROM Hospitales WHERE IdHospital = :id";
+        $sql = "SELECT * FROM hospitales WHERE IdHospital = :id";
 
         try {
             $db = new db_sistemaHospital();
